@@ -1,12 +1,32 @@
+if not Global.hint_weights then
+    if io.file_is_readable(SavePath .. "FunnyHints_Weights.json") then
+        Global.hint_weights = io.load_as_json(SavePath .. "FunnyHints_Weights.json")
+    end
+else
+    io.save_as_json(Global.hint_weights, SavePath .. "FunnyHints_Weights.json")
+end
+
+function HintRandom(string_id, messages)
+    local selector = WeightedSelector:new()
+    for _, message in pairs(messages) do
+        local weight = Utils:GetNestedValue(Global, "hint_weights", string_id, message) or 1
+        selector:add(message, weight)
+    end
+    return selector:select()
+end
+
 local function set_weights(last_hint)
-    local table = last_hint.table
-    local id = last_hint.id
+    local string_id = last_hint.id
+    local messages = Global["custom_hints_" .. last_hint.table][string_id]
+    if #messages <= 1 then
+        return
+    end
     local text = last_hint.text
-    local hint_weight = Global.hint_weights[table][id][text]
-    Global.hint_weights[table][id][text] = 0
-    for message, _ in pairs(Global.hint_weights[table][id]) do
+    local hint_weight = Utils:GetNestedValue(Global, "hint_weights", string_id, text) or 1
+    Utils:SetNestedValue(Global, 0, "hint_weights", string_id, text) -- second variable is to set the end value
+    for _, message in pairs(messages) do
         if message ~= text then
-            Global.hint_weights[table][id][message] = hint_weight / #Global.hint_weights[table][id]
+            Global.hint_weights[string_id][message] = (Global.hint_weights[string_id][message] or 1) + hint_weight / (#messages - 1)
         end
     end
 end
@@ -31,7 +51,7 @@ Hooks:PreHook(HUDManager, "show_hint", "FunnyHints_hud", function(self, params)
     end
     local string_id = get_string_id(Global.custom_hints_hud, params.text)
     if string_id then
-        params.text = table.random(Global.custom_hints_hud[string_id])
+        params.text = HintRandom(string_id, Global.custom_hints_hud[string_id])
         Global.last_hint = {
             time = current_time,
             table = "hud",
@@ -51,7 +71,7 @@ Hooks:PreHook(HUDManager, "present_mid_text", "FunnyHints_mid_text" , function (
     local current_time = managers.game_play_central:get_heist_timer()
     local string_id = get_string_id(Global.custom_hints_mid_text, params.title)
     if string_id and current_time - last_mid_text_hint_time > 10 then
-        local text = table.random(Global.custom_hints_mid_text[string_id])
+        local text = HintRandom(string_id, Global.custom_hints_mid_text[string_id])
         self:show_hint({ text = text })
         last_mid_text_hint_time = current_time
         Global.last_hint = {
