@@ -1,0 +1,64 @@
+local function set_weights(last_hint)
+    local table = last_hint.table
+    local id = last_hint.id
+    local text = last_hint.text
+    local hint_weight = Global.hint_weights[table][id][text]
+    Global.hint_weights[table][id][text] = 0
+    for message, _ in pairs(Global.hint_weights[table][id]) do
+        if message ~= text then
+            Global.hint_weights[table][id][message] = hint_weight / #Global.hint_weights[table][id]
+        end
+    end
+end
+
+local function get_string_id(custom_hints, text)
+    if text then
+        for string_id, _ in pairs(custom_hints) do
+            if managers.localization:text(string_id) == text then
+                return string_id
+            end
+        end
+    end
+end
+
+Global.custom_hints_hud = {
+    hud_hint_bipod_nomount = { "Your bipod doesn't fit here.", "You can't find a place to put it down.", "That won't do.", "You can't put it here.", "It needs something to rest on.", "The bipod is complaining.", "The bipod doesn't like that spot.", "The bipod cries as you try to put it down.", "User Error.", "The bipod is unhappy.", "Not there!", "That's not a good place for a bipod." },
+}
+Hooks:PreHook(HUDManager, "show_hint", "FunnyHints_hud", function(self, params)
+    local current_time = managers.game_play_central:get_heist_timer()
+    if current_time == Global.last_hint.time then
+        set_weights(Global.last_hint)
+    end
+    local string_id = get_string_id(Global.custom_hints_hud, params.text)
+    if string_id then
+        params.text = table.random(Global.custom_hints_hud[string_id])
+        Global.last_hint = {
+            time = current_time,
+            table = "hud",
+            id = string_id,
+            text = params.text
+        }
+    end
+end)
+
+Global.custom_hints_mid_text = {
+    hud_civilian_killed_title = { "Wow, uncalled for.", "What did they do to you?", "No Russian.", "Oops.", "Itchy trigger finger.", "That's not an enemy!", "You're disappointing bain.", "They had a family!", "Oh no!", "We'll need you to fill out some paperwork for that.", "You should not be trusted with a gun.", "Do you know how to aim that thing?", "I'm sure they just ran into that.", "Do you need the blood of the innocents?", "Rude.", "You've made an orphan.", "Now get the other parent!", "This is a pretty cheap mistake.", "Maybe that one was just undercover.", "You're a monster.", "You were just denfending yourself, right?", "Accidents happen.", "Killing a cop with a family is one thing, but this is just sick.", "Watch where you point that thing!", "You're infamous, not famous! You can't get away with that!", "Despicable You.", "Think of the children!", "I hope this isn't a kink of yours.", "You sicken me.", "Are we the baddies?", "You're totally not evil." },
+
+    hud_loot_secured_title = { "Is that enough?", "Get all of it!", "Still got some left?", "Bring more!", "Sing a song of six pence, a pocket full of dosh!", "Money makes the world go around.", "Whaaa, loadsamoney.", "Bosh bosh, shoom shoom wallop, dosh!", "lods of emone.", "Made a right load of perishing lolly this week.", "Fill it to the brim!", "You are made for heisting and that is made for storing what you heist.", "I want some more.", "All this stealing's making us rich!", "And they say crime doesn't pay.", "There's room for more.", "You deserve this.", "It's better in your hands.", "Take from the rich, give to yourself.", "You worked hard for this.", "Fuck yeah! We're doing it!", "Get that bread!", "Greed is Good! Greed is Good!", "Keep looting!", "Clean the place out!", "Don't you dare leave with only some of the loot!", "One!", "Clean them out at all cost!", "Steal anything that isn't nailed down.", "You're totally Robin Hood.", "I bet they didn't need this anyway.", "That's yours now.", "Let me just find a nice place for this.", "Good Heister.", "This one looks weird.", "Did you sweat on this?", "This one smells off.", "Can I have some of this?", "Keep 'em coming!", "Let's keep this going!", "Risk your life if you have to!" },
+}
+local last_mid_text_hint_time = -10
+Hooks:PreHook(HUDManager, "present_mid_text", "FunnyHints_mid_text" , function (self, params)
+    local current_time = managers.game_play_central:get_heist_timer()
+    local string_id = get_string_id(Global.custom_hints_mid_text, params.title)
+    if string_id and current_time - last_mid_text_hint_time > 10 then
+        local text = table.random(Global.custom_hints_mid_text[string_id])
+        self:show_hint({ text = text })
+        last_mid_text_hint_time = current_time
+        Global.last_hint = {
+            time = current_time,
+            table = "mid_text",
+            id = string_id,
+            text = text
+        }
+    end
+end)
