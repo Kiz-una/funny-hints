@@ -9,7 +9,7 @@ Hooks:PreHook(UnitNetworkHandler, "long_dis_interaction", "FunnyHints_callmod", 
         hint_help_player = hint_call_set,
     })
     Global.last_hint = {
-        time = curremanagers.game_play_central:get_heist_timer(),
+        time = Application:time(),
         table = "callmod",
         id = "hint_call",
         text = hint_call_set

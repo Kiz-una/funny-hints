@@ -199,23 +199,20 @@ Hooks:PreHook(HintManager, "_show_hint", "FunnyHints_main", function(self, id, t
 		LocalizationManager:add_localized_strings({
 			[string_id] = text
 		})
-		local current_time = managers.game_play_central:get_heist_timer()
 		if multi_ids[string_id] then
 			Global.last_hint = {
-				time = current_time,
+				time = Application:time(),
 				table = "main_multi",
 				id = multi_ids[string_id],
 				text = text
 			}
 		else
 			Global.last_hint = {
-				time = current_time,
+				time = Application:time(),
 				table = "main",
 				id = string_id,
 				text = text
 			}
 		end
-	else
-		managers.chat:_receive_message(1, "Funny Hints", "Missing Hint (" .. string_id .. ")", tweak_data.system_chat_color)
 	end
 end)
