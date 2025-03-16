@@ -9,7 +9,7 @@
 	],
 	"version" : "1",
 	"updates" : [{
-		"identifier" : "pd2_funnyhints",
-		"host": { "meta": "https://raw.githubusercontent.com/Kiz-una/pd2_funnyhints/refs/heads/main/meta.json" }
+		"identifier" : "funny-hints",
+		"host": { "meta": "https://raw.githubusercontent.com/Kiz-una/funny-hints/refs/heads/main/meta.json" }
 	}]
 }
