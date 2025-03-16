@@ -45,9 +45,6 @@ Global.custom_hints_hud = {
     hud_hint_bipod_nomount = { "Your bipod doesn't fit here.", "You can't find a place to put it down.", "That won't do.", "You can't put it here.", "It needs something to rest on.", "The bipod is complaining.", "The bipod doesn't like that spot.", "The bipod cries as you try to put it down.", "User Error.", "The bipod is unhappy.", "Not there!", "That's not a good place for a bipod." },
 }
 Hooks:PreHook(HUDManager, "show_hint", "FunnyHints_hud", function(self, params)
-    if Application:time() == Global.last_hint.time then
-        set_weights(Global.last_hint)
-    end
     local string_id = get_string_id(Global.custom_hints_hud, params.text)
     if string_id then
         params.text = HintRandom(string_id, Global.custom_hints_hud[string_id])
@@ -57,6 +54,9 @@ Hooks:PreHook(HUDManager, "show_hint", "FunnyHints_hud", function(self, params)
             id = string_id,
             text = params.text
         }
+    end
+    if Application:time() == Global.last_hint.time then
+        set_weights(Global.last_hint)
     end
 end)
 
