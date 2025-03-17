@@ -74,7 +74,7 @@ Hooks:PreHook(HUDManager, "present_mid_text", "FunnyHints_mid_text" , function (
         self:show_hint({ text = text })
         last_mid_text_hint_time = current_time
         Global.last_hint = {
-            time = current_time,
+            time = Application:time(),
             table = "mid_text",
             id = string_id,
             text = text
