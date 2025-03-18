@@ -11,7 +11,7 @@
 	hud_hint_mask_off_block_interact = "hint_mask_off",
 }
 
-Global.custom_hints_main_multi = {
+Global.custom_hints.main_multi = {
 hint_full = { "What are you gonna do with more?", "Don't be greedy.", "You can't take more.", "I don't think you need more.", "You already have enough.", "You want even more?", "No.", "You can't overfill yourself.", "The max is the max and you have reached it.", "I can't let you hog more.", "Your teammates might need it too, you know?", "This stuff isn't just for you alone!", "Sharing is caring and you have enough.", "You got your fair share.", "You got plenty.", "Leave it for the next chap.", "(T_T)", "Don't be an ass. Others need it too.", "Your pockets are full.", "You are overencumbered." },
 
 hint_sentry_not_enough_ammo = { "Yeah that's not gonna cover it.", "Needs more lead.", "Your buddy needs more food.", "That much ammo won't cut it.", "You need more bullets.", "Can't. How does it use those bullets anyway?", "No.", "Nuh-uh.", "That won't work.", "Yeah... no.", "Sorry bud, not enough ammo.", "Go grab some ammo.", "The sentry hungers.", "The sentry looks at you longingly.", "Sentry says no.", "That big boy needs to be full to place." },
@@ -19,27 +19,16 @@ hint_sentry_not_enough_ammo = { "Yeah that's not gonna cover it.", "Needs more l
 hint_mask_off = { "You can't do that.", "What? No!", "No.", "That's just not possible.", "You know you can't do that.", "What are you trying to do?", "I don't see a mask on that face.", "You think you can do that without a mask?", "You can't show your face doing that!", "What would your mother think if she saw you doing that?", "No. Just no.", "Stop that.", "Would a normal person do that?", "Be normal.", "You're one of them now. Blend in.", "That wouldn't be very civilian of you.", "(T_T)", "You're supposed to be stiff.", "Your superpowers are in your mask.", "No one cared who you are...", "Your face is naked.", "Your mask stores that power.", "Protect your identity first.", "If you're gonna be weird put on a mask.", "You're just here doing what normal people do." },
 }
 
-Global.custom_hints_main = {
-hint_full_health = Global.custom_hints_main_multi.hint_full,
-hint_full_bodybags = Global.custom_hints_main_multi.hint_full,
-hint_full_grenades = Global.custom_hints_main_multi.hint_full,
-hint_full_ammo = Global.custom_hints_main_multi.hint_full,
-hint_full_briefcase = Global.custom_hints_main_multi.hint_full,
-hint_max_special_equipment = Global.custom_hints_main_multi.hint_full,
-hint_sentry_not_enough_ammo_to_place = Global.custom_hints_main_multi.hint_sentry_not_enough_ammo,
-hud_hint_nea_sentry_gun = Global.custom_hints_main_multi.hint_sentry_not_enough_ammo,
-hud_hint_clean_block_interact = Global.custom_hints_main_multi.hint_mask_off,
-hud_hint_mask_off_block_interact = Global.custom_hints_main_multi.hint_mask_off,
+Global.custom_hints.main = {
+hint_teammate_downed = { "$TEAMMATE; has fallen and can't get up!", "Wow. Check out that loser.", "$TEAMMATE; didn't tie their shoes well.", "$TEAMMATE; needs a hand. You got a spare one?", "$TEAMMATE; is being dramatic.", "$TEAMMATE; got a boo-boo.", "$TEAMMATE; messed up.", "$TEAMMATE; has paid with their blood!", "$TEAMMATE; needs you to carry more.", "Oh no! $TEAMMATE;!", "Someone was downed.", "$TEAMMATE; is looking kinda red...", "$TEAMMATE; fucked up.", "$TEAMMATE; ate too much lead.", "Guess $TEAMMATE; isn't bulletproof.", "(>.>)", "This is $TEAMMATE;'s face right now -> (>o<)", "Don't help $TEAMMATE;.", "I don't think $TEAMMATE; is doing well.", "$TEAMMATE; might need a little help.", "$TEAMMATE; would never admit it, but they want some help.", "$TEAMMATE; needs a healing potion.", "I think $TEAMMATE; needs more than a medic bag.", "How could you let this happen to $TEAMMATE;?", "$TEAMMATE; got downed on your watch.", "If you help $TEAMMATE; now, you won't have to trade later.", "$TEAMMATE; is down. You're not a good team.", "Help your good ol' pal $TEAMMATE; out.", "I think that one's on them.", "$TEAMMATE; overestimated themselves.", "Not so hot now, are you $TEAMMATE;!", "$TEAMMATE; is so needy.", "$TEAMMATE; needs some pampering.", "$TEAMMATE; is too unmotivated to get up.", "$TEAMMATE; is feeling lazy right now.", "$TEAMMATE; isn't looking too hot.", "$TEAMMATE; needs to be repaired.", "$TEAMMATE; needs some spare blood.", "$TEAMMATE; is in need of medical attention!", "Help $TEAMMATE;! They're my favourite!" },
 
-hint_teammate_downed = { "$TEAMMATE; has fallen and can't get up!", "Wow. Check out that loser.", "$TEAMMATE; didn't tie their shoes well.", "$TEAMMATE; needs a hand. You got a spare one?", "$TEAMMATE; is being dramatic.", "$TEAMMATE; got a boo-boo.", "$TEAMMATE; messed up.", "$TEAMMATE; has paid with their blood!", "$TEAMMATE; needs you to carry more.", "Oh no! $TEAMMATE;!", "Someone was downed.", "$TEAMMATE; is looking kinda red...", "$TEAMMATE; fucked up.", "$TEAMMATE; ate too much lead.", "Guess $TEAMMATE; isn't bulletproof.", "(>.>)", "This is $TEAMMATE;'s face right now -> (>o<)", "Don't help $TEAMMATE;.", "I don't think $TEAMMATE; is doing well.", "$TEAMMATE; might need a little help.", "$TEAMMATE; would never admit it, but they want some help.", "$TEAMMATE; needs a healing potion.", "I think $TEAMMATE; needs more than a medic bag.", "How could you let this happen to $TEAMMATE;?", "$TEAMMATE; got downed on your watch.", "If you help $TEAMMATE; now, you won't have to trade later.", "$TEAMMATE; is down. You're not a good team.", "Help your good ol' pal $TEAMMATE; out.", "I think that one's on them.", "$TEAMMATE; overestimated themselves.", "Not so hot now, are you $TEAMMATE;!" },
+hint_you_helpedup = { "You're a real teamplayer!", "Good work helping $TEAMMATE;!", "You got $TEAMMATE; back in the fight.", "Let's hope $TEAMMATE; appreciates that.", "Give $TEAMMATE; a friendly smack for me.", "You're $TEAMMATE;'s hero!", "$TEAMMATE; will thank you some day.", "$TEAMMATE; is still here thanks to you.", "You delayed $TEAMMATE;'s death.", "You got $TEAMMATE;'s blood on you. Ew...", "$TEAMMATE; is still a little sticky.", "You should have just let $TEAMMATE; die.", "Feel $TEAMMATE;'s muscle. Mhh!", "Ew you touched $TEAMMATE;!", "You don't look good. I think $TEAMMATE; got you sick.", "I don't think $TEAMMATE; deserved that.", "You have HIV now.", "You got the cooties now!", "You're so nice.", "I'm proud of you.", "You put a smile on $TEAMMATE;'s face.", "Look $TEAMMATE; is smiling. Creepy...", "[ $TEAMMATE; liked that ]", "That's it. Leave no one behind.", "Good job.", "Mates forever.", "You care about $TEAMMATE;, admit it.", "Did you and $TEAMMATE; kiss?", "I would have never forgiven you if $TEAMMATE; died.", "I'm giving you a gold star.", "Your mother's very proud." },
 
-hint_you_helpedup = { "You're a real teamplayer!", "Good work helping $TEAMMATE;!", "You got $TEAMMATE; back in the fight.", "Let's hope $TEAMMATE; appreciates that.", "Give $TEAMMATE; a friendly smack for me.", "You're $TEAMMATE;'s hero!", "$TEAMMATE; will thank you some day.", "$TEAMMATE; is still here thanks to you.", "You delayed $TEAMMATE;'s death.", "You got $TEAMMATE;'s blood on you. Ew...", "$TEAMMATE; is still a little sticky.", "You should have just let $TEAMMATE; die.", "Feel $TEAMMATE;'s muscle. Mhh!", "Ew you touched $TEAMMATE;!", "You don't look good. I think $TEAMMATE; got you sick.", "I don't think $TEAMMATE; deserved that.", "You have HIV now.", "You got the cooties now!", "You're so nice.", "I'm proud of you.", "You put a smile on $TEAMMATE;'s face.", "Look $TEAMMATE; is smiling. Creepy...", "[ $TEAMMATE; liked that ]", "That's it. Leave no one behind.", "Good job.", "Mates forever.", "You care about $TEAMMATE;, admit it.", "Did you and $TEAMMATE; kiss?", "I would have never forgiven you if $TEAMMATE; died." },
+hint_teammate_helpedup = { "$TEAMMATE; is back in the fight!", "Don't worry $HELPER; got it.", "$HELPER; took care of $TEAMMATE; for you.", "$HELPER; and $TEAMMATE; touched each other.", "$HELPER; is pretty cool. I bet $TEAMMATE; agrees.", "Never fear, $HELPER; is here!", "You think $HELPER; has medical training?", "Thank $HELPER;.", "$TEAMMATE; is back up. No thanks to you.", "$HELPER; and $TEAMMATE;, sitting in a tree, K-I-S-S-I-N-G!", "$HELPER; saved $TEAMMATE;!", "$TEAMMATE; gave $HELPER; the cooties.", "$HELPER; is better than you.", "$TEAMMATE; and $HELPER; are now best friends.", "A bond like $HELPER; and $TEAMMATE;'s can never be broken.", "$HELPER; is the MVP right now.", "$HELPER; got to $TEAMMATE; first.", "Does $HELPER; have to do everything for you?", "You should have been the one to help $TEAMMATE;.", "$TEAMMATE; wanted you but had to settle for $HELPER;.", "Helping $TEAMMATE; was your job.", "Too late. $HELPER; got the credit.", "$HELPER; is getting a reward from me.", "We all knew $HELPER; was better than you.", "$HELPER; brought a smile to $TEAMMATE;'s face.", "I think $HELPER; loves $TEAMMATE;.", "$TEAMMATE; and $HELPER; look cute together.", "I ship $TEAMMATE; and $HELPER;.", "You won't get $TEAMMATE;'s love now.", "I think $TEAMMATE; is looking at you.", "Why didn't you help $TEAMMATE;?", "Oh well, $TEAMMATE;'s taken care of.", "$HELPER; thought $TEAMMATE; deserved some help.", "Do you think $TEAMMATE; doesn't deserve your help?", "Situation over. $TEAMMATE;'s back up.", "$HELPER; earned some social credit." },
 
-hint_teammate_helpedup = { "$TEAMMATE; is back in the fight!", "Don't worry $HELPER; got it.", "$HELPER; took care of $TEAMMATE; for you.", "$HELPER; and $TEAMMATE; touched each other.", "$HELPER; is pretty cool. I bet $TEAMMATE; agrees.", "Never fear, $HELPER; is here!", "You think $HELPER; has medical training?", "Thank $HELPER;.", "$TEAMMATE; is back up. No thanks to you.", "$HELPER; and $TEAMMATE;, sitting in a tree, K-I-S-S-I-N-G!", "$HELPER; saved $TEAMMATE;!", "$TEAMMATE; gave $HELPER; the cooties.", "$HELPER; is better than you.", "$TEAMMATE; and $HELPER; are now best friends.", "A bond like $HELPER; and $TEAMMATE;'s can never be broken.", "$HELPER; is the MVP right now.", "$HELPER; got to $TEAMMATE; first.", "Does $HELPER; have to do everything for you?", "You should have been the one to help $TEAMMATE;.", "$TEAMMATE; wanted you but had to settle for $HELPER;.", "Helping $TEAMMATE; was your job.", "Too late. $HELPER; got the credit.", "$HELPER; is getting a reward from me.", "We all knew $HELPER; was better than you.", "$HELPER; brought a smile to $TEAMMATE;'s face.", "I think $HELPER; loves $TEAMMATE;.", "$TEAMMATE; and $HELPER; look cute together.", "I ship $TEAMMATE; and $HELPER;.", "You won't get $TEAMMATE;'s love now.", "I think $TEAMMATE; is looking at you." },
+hint_you_were_helpedup = { "$HELPER; saved your ass.", "Thank $HELPER;.", "I don't like how $HELPER; touched you.", "You're only alive because $HELPER; was here.", "You better appreciate what $HELPER; did for you.", "$HELPER; was here for you.", "What a good friend.", "Dust yourself off and get back to it.", "A near death experience isn't a reason to rest.", "Now you owe your life to $HELPER;.", "$HELPER; is so carrying you right now.", "You owe $HELPER; a pint.", "Break's over.", "Don't do that to me again.", "I was so worried about you.", "At least you didn't go into custody.", "You keep playing like that and I'll lose respect for you.", "No messiah?", "Got anything to say to $HELPER;?", "A thanks would be in order.", "Wake the fuck up Samurai.", "We've got a city to burn.", "You're finally awake.", "Oh hey, you didn't die.", "Sleepy Head.", "You won't make your father proud at this rate.", "It could have been worse.", "At least you didn't go into custody.", "Stop lollygagging.", "All better?", "Did $HELPER; kiss your boo-boo?" },
 
-hint_you_were_helpedup = { "$HELPER; saved your ass.", "Thank $HELPER;.", "I don't like how $HELPER; touched you.", "You're only alive because $HELPER; was here.", "You better appreciate what $HELPER; did for you.", "$HELPER; was here for you.", "What a good friend.", "Dust yourself off and get back to it.", "A near death experience isn't a reason to rest.", "Now you owe your life to $HELPER;.", "$HELPER; is so carrying you right now.", "You owe $HELPER; a pint.", "Break's over.", "Don't do that to me again.", "I was so worried about you.", "At least you didn't go into custody.", "You keep playing like that and I'll lose respect for you.", "No messiah?", "Got anything to say to $HELPER;?", "A thanks would be in order.", "Wake the fuck up Samurai.", "We've got a city to burn.", "You're finally awake.", "Oh hey, you didn't die.", "Sleepy Head.", "You won't make your father proud at this rate.", "It could have been worse.", "At least you didn't go into custody.", "Stop lollygagging." },
-
-hint_teammate_dead = { "Poggies, $TEAMMATE; died!", "$TEAMMATE; forgot how to play.", "$TEAMMATE; went on vacation.", "$TEAMMATE; died. Press F to pay respects.", "$TEAMMATE; is in Timeout.", "Everyone, laugh at $TEAMMATE;!", "Was $TEAMMATE; useful?", "Bye Bye $TEAMMATE;!", "RIP", "Uh...", "Got a hostage for $TEAMMATE;?", "Welp, $TEAMMATE; is gone.", "$TEAMMATE;? $TEAMMATE;!? $TEAMMATE;!!!", "You slacker, $TEAMMATE; died!", "Oh no! Anyway-", "I'm sure $TEAMMATE; is just having an off day.", "$TEAMMATE; goes to Gay-Baby-Jail.", "Remind $TEAMMATE; not to drop the soap.", "I'm sorry but $TEAMMATE; has been taken.", "My condolences for the loss of $TEAMMATE;.", "Is $TEAMMATE; angry?", "Did you forget about $TEAMMATE;?", "$TEAMMATE; is in custody? Who cares.", "$TEAMMATE; wasn't even that useful.", "$TEAMMATE;'s gone. No big loss.", "You're too slow!", "Why weren't you there for $TEAMMATE;?" },
+hint_teammate_dead = { "Poggies, $TEAMMATE; died!", "$TEAMMATE; forgot how to play.", "$TEAMMATE; went on vacation.", "$TEAMMATE; died. Press F to pay respects.", "$TEAMMATE; is in Timeout.", "Everyone, laugh at $TEAMMATE;!", "Was $TEAMMATE; useful?", "Bye Bye $TEAMMATE;!", "RIP", "Uh...", "Got a hostage for $TEAMMATE;?", "Welp, $TEAMMATE; is gone.", "$TEAMMATE;? $TEAMMATE;!? $TEAMMATE;!!!", "You slacker, $TEAMMATE; died!", "I'm sure $TEAMMATE; is just having an off day.", "$TEAMMATE; goes to Gay-Baby-Jail.", "Remind $TEAMMATE; not to drop the soap.", "I'm sorry but $TEAMMATE; has been taken.", "My condolences for the loss of $TEAMMATE;.", "Is $TEAMMATE; angry?", "Did you forget about $TEAMMATE;?", "$TEAMMATE; is in custody? Who cares.", "$TEAMMATE; wasn't even that useful.", "$TEAMMATE;'s gone. No big loss.", "You're too slow!", "Why weren't you there for $TEAMMATE;?" },
 
 hint_you_revived = { "One hostage for one $TEAMMATE; please.", "Welcome back $TEAMMATE;.", "$TEAMMATE; better be thankful.", "Trade Accepted.", "Hi $TEAMMATE;", "Art of the Deal", "Suckers.", "Oh. $TEAMMATE; is back.", "Vacation's over, $TEAMMATE;.", "$TEAMMATE; Breakout: Success", "You legally own $TEAMMATE; now." },
 
@@ -75,7 +64,7 @@ hud_hint_body_bag_limit_reached = { "Oh no.", "Uh...", "Quick, get more body bag
 
 hud_hint_to_wake_up_pilot = { "Fact: Drunks react well to loud noises.", "Go yell in his ear.", "Wake him up, wake him up inside!", "Verbal abuse is appreciated.", "It's Hajrudin. Don't feel bad for him." },
 
-hud_hint_convert_enemy_failed = { ">:(", "No.", "He doesn't like you.", "You're not nice.", "He refuses.", "You're not likable enough.", "He doesn't want to do that.", "He isn't listening to you.", "You're not the boss of him!", "Leave him alone.", "He's not your little plaything!", "He's upset.", "Maybe next time.", "Nah, not right now.", "Poor guy.", "I pity him.", "I don't think he's happy.", "You're not very persuasive.", "You can't find the right words.", "Your words don't get through to him.", "Your request was declined.", "That one's more loyal.", "He gets paid too well.", "He's too patriotic.", "That would risk his promotion." },
+hud_hint_convert_enemy_failed = { ">:(", "No.", "He doesn't like you.", "You're not nice.", "He refuses.", "You're not likable enough.", "He doesn't want to do that.", "He isn't listening to you.", "You're not the boss of him!", "Leave him alone.", "He's not your little plaything!", "He's upset.", "Maybe next time.", "Nah, not right now.", "Poor guy.", "I pity him.", "I don't think he's happy.", "You're not very persuasive.", "You can't find the right words.", "Your words don't get through to him.", "Your request was declined.", "That one's more loyal.", "He gets paid too well.", "He's too patriotic.", "That would risk his promotion.", "Maybe offer him some candy?", "You need to give him headpats first." },
 
 hud_hint_health_berserking = { "Ha! No.", "Oh you're dead.", "The medic bag can't save you.", "You can't save yourself.", "Accept your death.", "You feel cold." },
 
@@ -134,9 +123,9 @@ hud_hint_cop_ecm_jammer = { "That was fucking loud." },
 hud_hint_civ_fire = { "The civie ordered some bacon for your BBQ." },
 hud_hint_alarm_pager_bluff_failed = { "To be fair, he should have noticed earlier." },
 hud_hint_cam_voting = { "It saw you abuse that poor veteran." },
-hud_hint_cop_breaking_entering = { "Trespassing is against the law!" },
+hud_hint_cop_breaking_entering = { "You're gonna have to leave the property.", "Beware the guard." },
 hud_hint_civ_trip_mine = { "Even the civie knew that shouldn't be there." },
-hint_civ_too_many_killed = { "Death called the police." },
+hint_civ_too_many_killed = { "The Grim Reaper called the police." },
 hud_hint_cam_vault = { "Should have offered the camera operator a cut." },
 hud_hint_civ_gunfire = { "Someone objected to your second amendment rights." },
 hud_hint_cop_vault = { "The schedule didn't have vault checking today." },
@@ -177,42 +166,75 @@ hud_hint_cop_hostage = { "The guard kink-shames you." },
 hud_hint_cop_saw = { "I don't think they use a saw here." },
 hud_hint_cop_sentry_gun = { "Your little buddy scared the guard." },
 hud_hint_mot_criminal = { "You dumbass!", "Whoops.", "You walked straight into that.", "Don't touch that!" },
-hud_hint_blame_csgo_gunfire = { "The neighborhood watch called in the army." },
-hud_hint_blame_missing = { "Someone saw something.", "I'm sure this is your fault.", "They must have been on stand-by." },
+hud_hint_blame_csgo_gunfire = { "The neighborhood watch called in the army.", "Robberies aren't allowed by the Homeowner association." },
+hud_hint_blame_missing = { "Someone saw something.", "I'm sure this is your fault.", "They must have been on stand-by.", "I literally don't know what tripped the alarm.", "Overkill triggered the alarm." },
 hud_hint_blame_police_alerted = { "911 has been summoned.", "The cop army comes.", "You've alerted the horde." },
 
 hint_damage_pad = { "Your health is showing.", "I don't like you.", "While you're reading this hopefully they're getting in a few potshots on your health. :)", "You're taking some of damage there...", "Watch your health!", "The thing you have before your health is gone.", "You should probably pull back a bit.", "A wise man would tell you to take cover.", "Is that blood?", "I think you're starting to bleed.", "You're not a god.", "Your armor is looking worse for wear.", "Did you know if you don't get shot, you regen armor?", "Your first layer of protection is gone.", "I think your armor ripped.", "You got a few holes in you.", "Why am I even still talking to you?", "Yeah! Eat those bullets!", "You should let them shoot you more.", "Walk closer to them.", "Ignore that noise.", "Nah, nothing's going wrong.", "Armor? What armor?", "Armor is for pussies.", "You're rawdogging lead now.", "I think one of your layers is gone.", "Ouch.", "Yowsa!", "Bam! Armor gone!", "You don't need armor right?", "You didn't need that anyway.", "You're in trouble.", "This isn't good.", "Hey watch out!", "Careful.", "Be more mindful.", "Kevlar, Shmevlar.", "Maybe you won't need that." },
 }
--- Heist Specific
-local need_heist_hints_check = true
+
+local alert_generic = {
+	{
+		-- Gunfire
+		ids = { "hud_hint_gunfire", "hud_hint_civ_gunfire", "hud_hint_cop_gunfire", "hud_hint_blame_csgo_gunfire" },
+		messages = { "We're not in a warzone.", "Put a silencer on that thing!" }
+	},
+	{
+		-- Broken Glass
+		ids = { "hud_hint_cam_glass", "hud_hint_alarm_glass", "hud_hint_civ_glass", "hud_hint_cop_glass" },
+		messages = { "What did that glass ever do to you?", "Mazel tov?" }
+	},
+	{
+		-- Broken Object
+		ids = { "hud_hint_cam_glass", "hud_hint_alarm_glass", "hud_hint_civ_glass", "hud_hint_cop_glass", "hud_hint_cam_broken_cam", "hud_hint_cop_broken_cam", "hud_hint_civ_broken_cam" },
+		messages = { "They're asking you to cover the repair costs.", "You're gonna have to give them your insurance details.", "It was just sitting there, minding its own business, and you had to break it." }
+	},
+	{
+		-- Trespassing
+		ids = { "hud_hint_cam_breaking_entering", "hud_hint_civ_breaking_entering", "hud_hint_cop_breaking_entering" },
+		messages = { "Trespassing is against the law!", "Trespassers will be shot." }
+	},
+	{
+		-- Fire
+		ids = { "hud_hint_cop_fire", "hud_hint_civ_fire", "hud_hint_cam_fire" },
+		messages = { "We didn't start the fire." }
+	},
+	{
+		-- Sentry
+		ids = { "hud_hint_cam_sentry_gun" },
+		messages = { "Your buddy got spotted.", "Your robo friend is to blame." }
+	},
+	{
+		-- Panic
+		ids = { "hud_hint_cop_distress", "hud_hint_civ_distress", "hud_hint_cam_distress" },
+		messages = { "Panic.", "The crowd goes wild!" }
+	}
+}
+InsertMessages(alert_generic, "main")
+
 Hooks:PreHook(HintManager, "_show_hint", "FunnyHints_main", function(self, id, time, only_sync, params)
-	if need_heist_hints_check then
-		need_heist_hints_check = false
-		if managers.job:current_job_id() == "four_stores" then
-			Global.custom_hints_main.hud_hint_grabbed_small_loot = { "Progress!", "This stuff isn't worth much, but Vlad doesn't care.", "This is the greatest heist.", "This is totally worth it.", "If only I was justified to insult you for this.", "Useful for once.", "Munnie!", "Holla Holla get Dollar.", "These stores have so little money.", "Four Stores? More like Four Dollars!", "I'd rather rob a 7-Eleven.", "Cha-Ching!", "Cash is Queen.", "Greed is Good!", "Look at that wad!" }
-			log("[Funny Hints] Heist specific messages set.")
-		end
-	end
+	SetHeistSpecificHints()
+
 	local string_id = Global.hint_manager.hints[id].text_id
-	if Global.custom_hints_main[string_id] then
-		local text = HintRandom(string_id, Global.custom_hints_main[string_id])
-		LocalizationManager:add_localized_strings({
-			[string_id] = text
-		})
-		if multi_ids[string_id] then
-			Global.last_hint = {
-				time = Application:time(),
-				table = "main_multi",
-				id = multi_ids[string_id],
-				text = text
-			}
-		else
-			Global.last_hint = {
-				time = Application:time(),
-				table = "main",
-				id = string_id,
-				text = text
-			}
-		end
+	local message = nil
+	if multi_ids[string_id] then
+		message = HintRandom(multi_ids[string_id], Global.custom_hints.main_multi[multi_ids[string_id]])
+		Global.last_hint = {
+			time = Application:time(),
+			list = "main_multi",
+			id = multi_ids[string_id],
+			text = message
+		}
+	elseif Global.custom_hints.main[string_id] then
+		message = HintRandom(string_id, Global.custom_hints.main[string_id])
+		Global.last_hint = {
+			time = Application:time(),
+			list = "main",
+			id = string_id,
+			text = message
+		}
 	end
+	LocalizationManager:add_localized_strings({
+		[string_id] = message
+	})
 end)
