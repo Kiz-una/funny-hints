@@ -1,9 +1,3 @@
-local function log_private_chat(message, title)
-    if not title then
-        title = "Funny Hints"
-    end
-    managers.chat:_receive_message(1, title, message, tweak_data.system_chat_color)
-end
 if not Global.custom_hints then
     Global.custom_hints = {} -- Needs to be declared before declaring other tables inside it. This file loads first going into a heist.
 end
@@ -52,9 +46,6 @@ function InsertMessages(data, list)
 end
 
 function HintRandom(string_id, messages)
-    if not Global.hint_weights[string_id] then
-        log_private_chat("Dectected a new hint in HintRandom. (" .. string_id .. ")")
-    end
     local selector = WeightedSelector:new()
     for _, message in pairs(messages) do
         local weight = Utils:GetNestedValue(Global, "hint_weights", string_id, message) or 1
@@ -65,9 +56,6 @@ end
 
 local function set_weights(last_hint)
     local string_id = last_hint.id
-    if not Global.hint_weights[string_id] then
-        log_private_chat("Dectected a new hint in set_weights. (" .. string_id .. ")")
-    end
     local messages = Global.custom_hints[last_hint.list][string_id]
     if #messages <= 1 then
         return
