@@ -26,7 +26,7 @@ hint_you_helpedup = { "You're a real teamplayer!", "Good work helping $TEAMMATE;
 
 hint_teammate_helpedup = { "$TEAMMATE; is back in the fight!", "Don't worry $HELPER; got it.", "$HELPER; took care of $TEAMMATE; for you.", "$HELPER; and $TEAMMATE; touched each other.", "$HELPER; is pretty cool. I bet $TEAMMATE; agrees.", "Never fear, $HELPER; is here!", "You think $HELPER; has medical training?", "Thank $HELPER;.", "$TEAMMATE; is back up. No thanks to you.", "$HELPER; and $TEAMMATE;, sitting in a tree, K-I-S-S-I-N-G!", "$HELPER; saved $TEAMMATE;!", "$TEAMMATE; gave $HELPER; the cooties.", "$HELPER; is better than you.", "$TEAMMATE; and $HELPER; are now best friends.", "A bond like $HELPER; and $TEAMMATE;'s can never be broken.", "$HELPER; is the MVP right now.", "$HELPER; got to $TEAMMATE; first.", "Does $HELPER; have to do everything for you?", "You should have been the one to help $TEAMMATE;.", "$TEAMMATE; wanted you but had to settle for $HELPER;.", "Helping $TEAMMATE; was your job.", "Too late. $HELPER; got the credit.", "$HELPER; is getting a reward from me.", "We all knew $HELPER; was better than you.", "$HELPER; brought a smile to $TEAMMATE;'s face.", "I think $HELPER; loves $TEAMMATE;.", "$TEAMMATE; and $HELPER; look cute together.", "I ship $TEAMMATE; and $HELPER;.", "You won't get $TEAMMATE;'s love now.", "I think $TEAMMATE; is looking at you.", "Why didn't you help $TEAMMATE;?", "Oh well, $TEAMMATE;'s taken care of.", "$HELPER; thought $TEAMMATE; deserved some help.", "Do you think $TEAMMATE; doesn't deserve your help?", "Situation over. $TEAMMATE;'s back up.", "$HELPER; earned some social credit." },
 
-hint_you_were_helpedup = { "$HELPER; saved your ass.", "Thank $HELPER;.", "I don't like how $HELPER; touched you.", "You're only alive because $HELPER; was here.", "You better appreciate what $HELPER; did for you.", "$HELPER; was here for you.", "What a good friend.", "Dust yourself off and get back to it.", "A near death experience isn't a reason to rest.", "Now you owe your life to $HELPER;.", "$HELPER; is so carrying you right now.", "You owe $HELPER; a pint.", "Break's over.", "Don't do that to me again.", "I was so worried about you.", "At least you didn't go into custody.", "You keep playing like that and I'll lose respect for you.", "No messiah?", "Got anything to say to $HELPER;?", "A thanks would be in order.", "Wake the fuck up Samurai.", "We've got a city to burn.", "You're finally awake.", "Oh hey, you didn't die.", "Sleepy Head.", "You won't make your father proud at this rate.", "It could have been worse.", "At least you didn't go into custody.", "Stop lollygagging.", "All better?", "Did $HELPER; kiss your boo-boo?", "Let this be a teachable moment." },
+hint_you_were_helpedup = { "$HELPER; saved your ass.", "Thank $HELPER;.", "I don't like how $HELPER; touched you.", "You're only alive because $HELPER; was here.", "You better appreciate what $HELPER; did for you.", "$HELPER; was here for you.", "What a good friend.", "Dust yourself off and get back to it.", "A near death experience isn't a reason to rest.", "Now you owe your life to $HELPER;.", "$HELPER; is so carrying you right now.", "You owe $HELPER; a pint.", "Break's over.", "Don't make me worried like that again.", "I was so worried about you.", "At least you didn't go into custody.", "You keep playing like that and I'll lose respect for you.", "No messiah?", "Got anything to say to $HELPER;?", "A thanks would be in order.", "Wake the fuck up Samurai.", "We've got a city to burn.", "You're finally awake.", "Oh hey, you didn't die.", "Sleepy Head.", "You won't make your father proud at this rate.", "It could have been worse.", "At least you didn't go into custody.", "Stop lollygagging.", "All better?", "Did $HELPER; kiss your boo-boo?", "Let this be a teachable moment.", "There. All better now.", "You feel revitalized." },
 
 hint_teammate_dead = { "Poggies, $TEAMMATE; died!", "$TEAMMATE; forgot how to play.", "$TEAMMATE; went on vacation.", "$TEAMMATE; died. Press F to pay respects.", "$TEAMMATE; is in Timeout.", "Everyone, laugh at $TEAMMATE;!", "Was $TEAMMATE; useful?", "Bye Bye $TEAMMATE;!", "RIP", "Uh...", "Got a hostage for $TEAMMATE;?", "Welp, $TEAMMATE; is gone.", "$TEAMMATE;? $TEAMMATE;!? $TEAMMATE;!!!", "You slacker, $TEAMMATE; died!", "I'm sure $TEAMMATE; is just having an off day.", "$TEAMMATE; goes to Gay-Baby-Jail.", "Remind $TEAMMATE; not to drop the soap.", "I'm sorry but $TEAMMATE; has been taken.", "My condolences for the loss of $TEAMMATE;.", "Is $TEAMMATE; angry?", "Did you forget about $TEAMMATE;?", "$TEAMMATE; is in custody? Who cares.", "$TEAMMATE; wasn't even that useful.", "$TEAMMATE;'s gone. No big loss.", "You're too slow!", "Why weren't you there for $TEAMMATE;?" },
 
@@ -82,9 +82,9 @@ hint_dropped_blood_sample = { "Hope you found a spare.", "Ouch ouch! Shards!", "
 
 hint_shoot_wires = { "It's stuck!", "Bullets are good at cutting wires.", "How is that holding up?" },
 
-hint_cross_thugs = { "Bro!", "Yo!", "Don't interrupt the chill!", "You need a backstage pass.", "You shall not pass.", "That guy doesn't sound real.", "How many packs a day does that guy smoke?", "Upstairs is for VIPs.", "They're not giving out tours.", "You're not on the list." },
+hint_cross_thugs = { "You don't have the backstage pass.", "You shall not pass.", "Upstairs is for VIPs.", "They're not giving out tours.", "You're not on the list.", "Know your place.", "They're standing between you and the panic room.", "A stubborn Gangster blocks the way!" },
 
-hud_hint_add_time = { "Nice!", "Bonus Time!", "You're getting a treat.", "You're doing well.", "I like green.", "Woohoo!", "Have a lollipop.", "Cutout cops are still cops.", "Yeah! Fuck that cutout!", "You showed that fake cop!", "I can't believe I'm rewarding you for that.", "You get a reward for that.", "Fuck Yeah!" },
+hud_hint_add_time = { "Nice!", "Bonus Time!", "You're getting a treat.", "You're doing well.", "I like green.", "Woohoo!", "Have a lollipop.", "Cutout cops are still cops.", "Yeah! Fuck that cutout!", "You showed that fake cop!", "I can't believe I'm rewarding you for that.", "You get a reward for that.", "Fuck Yeah!", "You're pretty good!" },
 
 hud_hint_subtract_time = { "Dumbass.", "What are you doing?", "You're getting a penalty for that.", "Why?", "You did bad.", "Did you mean to do that?", "See the red? That's bad." },
 
@@ -158,7 +158,7 @@ hud_hint_civ_voting = { "A proud american reported you." },
 hud_hint_civ_weapons_hot = { "Second amendment, asshole!" },
 hud_hint_cop_body_bag = { "None of the guards are going to the gym today." },
 hud_hint_cop_computer = { "Fuck the IT department, call 911." },
-hud_hint_cop_criminal = { "Stop right there criminal scum!", "He deserves a promotion.", "Guard did his job." },
+hud_hint_cop_criminal = { "Stop right there criminal scum!", "He deserves a promotion.", "Guard did his job.", "!" },
 hud_hint_cop_drill = { "That's not protocol for losing your keys." },
 hud_hint_cop_glass = { "Vandalism gets met with extreme force." },
 hud_hint_cop_gunfire = { "There's no rednecks on staff today." },
@@ -215,26 +215,26 @@ InsertMessages(alert_generic, "main")
 Hooks:PreHook(HintManager, "_show_hint", "FunnyHints_main", function(self, id, time, only_sync, params)
 	SetHeistSpecificHints()
 
-	local string_id = Global.hint_manager.hints[id].text_id
+	local hint_id = Global.hint_manager.hints[id].text_id
 	local message = nil
-	if multi_ids[string_id] then
-		message = HintRandom(multi_ids[string_id], Global.custom_hints.main_multi[multi_ids[string_id]])
+	if multi_ids[hint_id] then
+		message = HintRandom(multi_ids[hint_id], Global.custom_hints.main_multi[multi_ids[hint_id]])
 		Global.last_hint = {
 			time = Application:time(),
-			list = "main_multi",
-			id = multi_ids[string_id],
+			list_id = "main_multi",
+			hint_id = multi_ids[hint_id],
 			text = message
 		}
-	elseif Global.custom_hints.main[string_id] then
-		message = HintRandom(string_id, Global.custom_hints.main[string_id])
+	elseif Global.custom_hints.main[hint_id] then
+		message = HintRandom(hint_id, Global.custom_hints.main[hint_id])
 		Global.last_hint = {
 			time = Application:time(),
-			list = "main",
-			id = string_id,
+			list_id = "main",
+			hint_id = hint_id,
 			text = message
 		}
 	end
 	LocalizationManager:add_localized_strings({
-		[string_id] = message
+		[hint_id] = message
 	})
 end)
