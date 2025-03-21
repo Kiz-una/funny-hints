@@ -37,7 +37,7 @@ end
 
 function IsPlayerAlive()
     local unit = managers.player and managers.player:player_unit()
-    return unit:character_damage() and unit:character_damage().dead and not unit:character_damage():dead()
+    return unit and unit:character_damage() and unit:character_damage().dead and not unit:character_damage():dead()
 end
 
 local heist_specific_overrides = {
@@ -116,28 +116,40 @@ Global.custom_hints.effects = {
 
     hint_last_life_replenished_2 = { "You really need to up your game.", "You should use cover, not a Doctor Bag!", "Are you just not paying attention?", "Please tell me you're using a joke loadout.", "You're really dragging the team down.", "How are you getting downed this much?", "Are you hugging the enemies?", "At this point it's more cost effective for you to go into custody instead." },
 
-    hint_last_life_replenished_end = { "I'm wasting my breath on you.", "You're god awful. I'm leaving.", "I've seen enough of you. Goodbye." },
+    hint_last_life_replenished_end = { "I'm wasting my breath on you.", "You're godawful. I'm leaving.", "I've seen enough of you. Goodbye." },
 
     hint_flash = { "SEGA", "You have a little private time with me now. :)", "I can hear a horse carriage.", "That's embarrassing.", "That's going in my cringe compilation.", "Right in the optics!", "That wasn't a nice present.", "There there. I'm here for you.", "You poor thing.", "Damn gas makes me cry.", "Just wear a blindfold.", "Look away from those.", "Think faster chucklenut.", "Your opinion, my choice.", "Get 'banged! That doesn't sound right...", "Isn't flashing someone illegal?", "My eyes!", "We'll be right back.", "A minor setback.", "They're so tacticool.", "They got you good.", "Pocket sand!", "You took the full brunt of that.", "You like eating flashes?", "It's possible to avoid getting flashed this badly, you know.", "That was avoidable.", "Did you not see that coming?", "How're you gonna know what you're aiming at like this?", ":(", "Well this sucks." }
 }
 InsertMessages({{ids = {"hint_last_life_replenished_1"}, messages = Global.custom_hints.effects.hint_last_life_replenished_0}}, "effects")
 
 local previous_last_life_state = false
-local last_life_occurances = 0
+local saved_by_doctorbag = 0
+if not Global.doctorbag_overuse then
+    Global.doctorbag_overuse = 0
+end
 Hooks:PostHook(CoreEnvironmentControllerManager, "set_last_life", "FunnyHints_last_life", function(self, last_life_effect)
     if previous_last_life_state and not last_life_effect and IsPlayerAlive() then
         if Global.game_settings.one_down then
             ShowHintCustom("hint_last_life_replenished_0", "effects")
         else
-            last_life_occurances = last_life_occurances + 1
-            if last_life_occurances < 2 then
-                ShowHintCustom("hint_last_life_replenished_1", "effects")
-            elseif last_life_occurances < 4 then
-                ShowHintCustom("hint_last_life_replenished_2", "effects")
-            else
+            saved_by_doctorbag = saved_by_doctorbag + 1
+            if saved_by_doctorbag > 1 then
+                local infamy = managers.experience:current_rank()
+                if infamy and infamy > 0 then
+                    Global.doctorbag_overuse = Global.doctorbag_overuse + 1
+                end
+            end
+            if saved_by_doctorbag > 3 or Global.doctorbag_overuse > 1 then -- 4 uses or 2 overuses across heists
                 ShowHintCustom("hint_last_life_replenished_end", "effects")
                 Global.hint_easteregg = true
                 managers.hud.show_hint = function(_)end
+
+            elseif saved_by_doctorbag < 2 then -- 1 uses only
+                ShowHintCustom("hint_last_life_replenished_1", "effects")
+
+            elseif saved_by_doctorbag < 4 then -- 2 and 3 uses
+                ShowHintCustom("hint_last_life_replenished_2", "effects")
+
             end
         end
     end

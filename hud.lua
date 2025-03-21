@@ -56,7 +56,7 @@ end
 Global.custom_hints.hud = {
     hud_hint_bipod_nomount = { "Your bipod doesn't fit here.", "You can't find a place to put it down.", "That won't do.", "You can't put it here.", "It needs something to rest on.", "The bipod is complaining.", "The bipod doesn't like that spot.", "The bipod cries as you try to put it down.", "User Error.", "The bipod is unhappy.", "Not there!", "That's not a good place for a bipod." },
 
-    hud_vehicle_broken = { "That engine sounds unhappy.", "Now that doesn't sound good.", "Please contact your Automotive Service Technician.", "I wish Scooter was here.", "You're a sitting duck in this wreck!", "The engine light is on." }
+    hud_vehicle_broken = { "That engine sounds unhappy.", "Now that doesn't sound good.", "Please contact your Automotive Service Technician.", "I wish Scooter was here.", "You're a sitting duck in this wreck!", "The engine light is on.", "You're gonna need a tow truck." }
 }
 Hooks:PreHook(HUDManager, "show_hint", "FunnyHints_hud", function(self, params)
     local hint_id = get_hint_id(Global.custom_hints.hud, params.text)
