@@ -3,10 +3,10 @@ DevPath = ModPath .. "dev.json"
 if io.file_is_readable(DevPath) then
     LogFile = io.load_as_json(DevPath) or {}
 end
-local function check_for_unattended_issues()
-    if LogFile then
-        for _, issue in pairs(LogFile) do
-            if issue.checked == false then
+local function check_for_errors()
+    if LogFile and LogFile.errors then
+        for _, entry in pairs(LogFile.errors) do
+            if entry.checked == false then
                 LogConsole("You have issues you have not marked as checked in dev.json. Mark all problems as checked to stop this message.")
                 break
             end
@@ -16,7 +16,7 @@ end
 function LogConsole(message)
     log("[Funny Hints] " .. message)
 end
-function LogPrivateChat(message, title)
+function LogPrivateChat(message)
     if not LogFile then
         return
     end
@@ -31,6 +31,14 @@ if not Global.hint_weights then
 else
     io.save_as_json(Global.hint_weights, SavePath .. "FunnyHints_Weights.json")
 end
+if Global.hint_easteregg then
+    managers.hud.show_hint = function(_)end
+end
+
+function IsPlayerAlive()
+    local unit = managers.player and managers.player:player_unit()
+    return unit:character_damage() and unit:character_damage().dead and not unit:character_damage():dead()
+end
 
 local heist_specific_overrides = {
 	four_stores = {
@@ -43,7 +51,7 @@ local heist_specific_overrides = {
 
 local heist_hints_checked = false
 function SetHeistSpecificHints()
-    check_for_unattended_issues()
+    check_for_errors()
     if heist_hints_checked then
         return
     end
@@ -64,7 +72,7 @@ function InsertMessages(data, list_id)
 		for _, hint_id in pairs(message_data.ids) do
 			for _, message in pairs(message_data.messages) do
 				table.insert(Global.custom_hints[list_id][hint_id], message)
-                check_for_unattended_issues()
+                check_for_errors()
 			end
 		end
 	end
@@ -78,26 +86,66 @@ function HintRandom(hint_id, messages)
     end
     return selector:select()
 end
+
+function SetHint(hint_id, list_id)
+    SetHeistSpecificHints()
+    local message = HintRandom(hint_id, Global.custom_hints[list_id][hint_id])
+    Global.last_hint = {
+        time = Application:time(),
+        hint_id = hint_id,
+        list_id = list_id,
+        text = message
+    }
+    return message
+end
+
+local last_hint_time = -math.huge
+function ShowHintCustom(hint_id, list_id, cooldown)
+    if Application:time() - last_hint_time > (cooldown or 2) then
+        local message = SetHint(hint_id, list_id)
+        managers.hud:show_hint({ text = message })
+        last_hint_time = Application:time()
+    end
+end
 -- mod init end
 
-Global.custom_hints.flash = {
+Global.custom_hints.effects = {
+    hint_last_life_replenished_0 = { "That was close.", "Living on a razor's edge ain't fun.", "Aw, you took the suspense out!", "You're outta the danger zone.", "The bullets inside you disappear.", "All better now.", "Wow, you stitch fast!", "Almost dying is a risky move." },
+
+    hint_last_life_replenished_1 = { "If you get out of custody, they also give you ammo.", "Are you done fucking around now?", "If you need it again, that'll be truly embarrassing.", "Come on, you really need this crutch?", "Real heisters don't use Doctor Bags." },
+
+    hint_last_life_replenished_2 = { "You really need to up your game.", "You should use cover, not a Doctor Bag!", "Are you just not paying attention?", "Please tell me you're using a joke loadout.", "You're really dragging the team down.", "How are you getting downed this much?", "Are you hugging the enemies?", "At this point it's more cost effective for you to go into custody instead." },
+
+    hint_last_life_replenished_end = { "I'm wasting my breath on you.", "You're god awful. I'm leaving.", "I've seen enough of you. Goodbye." },
+
     hint_flash = { "SEGA", "You have a little private time with me now. :)", "I can hear a horse carriage.", "That's embarrassing.", "That's going in my cringe compilation.", "Right in the optics!", "That wasn't a nice present.", "There there. I'm here for you.", "You poor thing.", "Damn gas makes me cry.", "Just wear a blindfold.", "Look away from those.", "Think faster chucklenut.", "Your opinion, my choice.", "Get 'banged! That doesn't sound right...", "Isn't flashing someone illegal?", "My eyes!", "We'll be right back.", "A minor setback.", "They're so tacticool.", "They got you good.", "Pocket sand!", "You took the full brunt of that.", "You like eating flashes?", "It's possible to avoid getting flashed this badly, you know.", "That was avoidable.", "Did you not see that coming?", "How're you gonna know what you're aiming at like this?", ":(", "Well this sucks." }
 }
-local last_flash_hint_time = -math.huge
-Hooks:PostHook(CoreEnvironmentControllerManager, "set_flashbang", "FunnyHints_flash", function (self)
-    SetHeistSpecificHints()
+InsertMessages({{ids = {"hint_last_life_replenished_1"}, messages = Global.custom_hints.effects.hint_last_life_replenished_0}}, "effects")
 
-    local current_time = managers.game_play_central:get_heist_timer()
+local previous_last_life_state = false
+local last_life_occurances = 0
+Hooks:PostHook(CoreEnvironmentControllerManager, "set_last_life", "FunnyHints_last_life", function(self, last_life_effect)
+    if previous_last_life_state and not last_life_effect and IsPlayerAlive() then
+        if Global.game_settings.one_down then
+            ShowHintCustom("hint_last_life_replenished_0", "effects")
+        else
+            last_life_occurances = last_life_occurances + 1
+            if last_life_occurances < 2 then
+                ShowHintCustom("hint_last_life_replenished_1", "effects")
+            elseif last_life_occurances < 4 then
+                ShowHintCustom("hint_last_life_replenished_2", "effects")
+            else
+                ShowHintCustom("hint_last_life_replenished_end", "effects")
+                Global.hint_easteregg = true
+                managers.hud.show_hint = function(_)end
+            end
+        end
+    end
+    previous_last_life_state = last_life_effect
+end)
+Hooks:PostHook(CoreEnvironmentControllerManager, "set_flashbang", "FunnyHints_flash", function(self)
     local flash_strength = math.pow(math.min(self._current_flashbang, 1), 16) + math.min(self._current_flashbang_flash, 1)
-    if flash_strength >= 2 and current_time - last_flash_hint_time > 2 then -- flash_strength 2 is max
-        local message = HintRandom("hint_flash", Global.custom_hints.flash.hint_flash)
-        Global.last_hint = {
-            time = Application:time(),
-            list_id = "flash",
-            hint_id = "hint_flash",
-            text = message
-        }
-        managers.hud:show_hint({ text = message })
-        last_flash_hint_time = current_time
+    if flash_strength >= 2 then -- flash_strength 2 is max
+        ShowHintCustom("hint_flash", "effects")
     end
 end)

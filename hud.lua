@@ -14,7 +14,9 @@ local function set_weights(last_hint)
             total_weight = total_weight + Global.hint_weights[hint_id][message]
         end
     end
-    if total_weight / #messages < 0.0001 then -- Failsafe in case of serious weight losses. Technically unecessary but prevents using scientific notation.
+
+    -- Failsafe in case of serious weight losses. Technically unecessary but prevents using scientific notation.
+    if total_weight / #messages < 0.0001 then
         LogConsole("Triggered failsafe for lost weight. If this message keeps appearing, create a file called dev.json in the mod's folder and look out for the mod outputing system messages into chat (these messages are only seen by you and will not disturb other players). Once one appears, send dev.json to the mod creator. Feel free to delete dev.json after you've done this to stop console spam.")
         if LogFile then
             local new_entry = {
@@ -26,7 +28,10 @@ local function set_weights(last_hint)
             for message, weight in pairs(Global.hint_weights[hint_id]) do
                 new_entry.info[message] = weight
             end
-            table.insert(LogFile, new_entry)
+            if not LogFile.errors then
+                LogFile.errors = {}
+            end
+            table.insert(LogFile.errors, new_entry)
             io.save_as_json(LogFile, DevPath)
             LogPrivateChat("Found serious weight losses in " .. hint_id .. ".")
         end
@@ -50,22 +55,35 @@ end
 
 Global.custom_hints.hud = {
     hud_hint_bipod_nomount = { "Your bipod doesn't fit here.", "You can't find a place to put it down.", "That won't do.", "You can't put it here.", "It needs something to rest on.", "The bipod is complaining.", "The bipod doesn't like that spot.", "The bipod cries as you try to put it down.", "User Error.", "The bipod is unhappy.", "Not there!", "That's not a good place for a bipod." },
+
+    hud_vehicle_broken = { "That engine sounds unhappy.", "Now that doesn't sound good.", "Please contact your Automotive Service Technician.", "I wish Scooter was here.", "You're a sitting duck in this wreck!", "The engine light is on." }
 }
 Hooks:PreHook(HUDManager, "show_hint", "FunnyHints_hud", function(self, params)
-    SetHeistSpecificHints()
-
     local hint_id = get_hint_id(Global.custom_hints.hud, params.text)
     if hint_id then
-        params.text = HintRandom(hint_id, Global.custom_hints.hud[hint_id])
-        Global.last_hint = {
-            time = Application:time(),
-            list_id = "hud",
-            hint_id = hint_id,
-            text = params.text
-        }
+        params.text = SetHint(hint_id, "hud")
     end
-    if Global.last_hint and Application:time() == Global.last_hint.time then
+    if Global.last_hint and Application:time() == Global.last_hint.time and not Global.hint_easteregg then
         set_weights(Global.last_hint)
+    else
+        if LogFile then
+            LogPrivateChat("No replacement messages found.")
+			if not LogFile.missed_hints then
+				LogFile.missed_hints = {}
+			end
+            local hint_already_logged = false
+            for _, message in pairs(LogFile.missed_hints) do
+                if message == params.text then
+                    hint_already_logged = true
+                    break
+                end
+            end
+            if not hint_already_logged then
+                table.insert(LogFile.missed_hints, params.text)
+                io.save_as_json(LogFile, DevPath)
+                LogPrivateChat("Adding hint to LogFile.")
+            end
+		end
     end
 end)
 
@@ -74,23 +92,10 @@ Global.custom_hints.mid_text = {
 
     hud_loot_secured_title = { "Is that enough?", "Get all of it!", "Still got some left?", "Bring more!", "Sing a song of six pence, a pocket full of dosh!", "Money makes the world go around.", "Whaaa, loadsamoney.", "Bosh bosh, shoom shoom wallop, dosh!", "lods of emone.", "Made a right load of perishing lolly this week.", "Fill it to the brim!", "You are made for heisting and that was meant for hauling what you heist.", "I want some more.", "All this stealing's making us rich!", "And they say crime doesn't pay.", "There's room for more.", "You deserve this.", "It's better in your hands.", "Take from the rich, give to yourself.", "You worked hard for this.", "Fuck yeah! We're doing it!", "Get that bread!", "Greed is Good! Greed is Good!", "Keep looting!", "Clean the place out!", "Don't you dare leave with only part of the loot!", "One!", "Clean them out at all cost!", "Steal anything that isn't nailed down.", "You're totally Robin Hood.", "I bet they didn't need this anyway.", "That's yours now.", "Let me just find a nice place for this.", "Good Heister.", "Did you sweat on this?", "Can I have some of this?", "Keep 'em coming!", "Let's keep this going!", "Risk your life if you have to!", "This is becoming routine.", "Music to my ears.", "What's theirs is yours.", "Possession is nine-tenths of the law.", "You can never have enough.", "Where's my cut?", "How much is enough?", "How big does the pile in your safehouse have to be?", "More! More!", "I need my payday too." },
 }
-local cooldowns = { default = 30, hud_civilian_killed_title = 2 }
-local last_mid_text_hint_time = -math.huge
+local cooldowns = { hud_loot_secured_title = 30 }
 Hooks:PreHook(HUDManager, "present_mid_text", "FunnyHints_mid_text" , function (self, params)
-    SetHeistSpecificHints()
-
-    local current_time = managers.game_play_central:get_heist_timer()
     local hint_id = get_hint_id(Global.custom_hints.mid_text, params.title)
-    local cooldown = cooldowns[hint_id] or cooldowns.default
-    if hint_id and current_time - last_mid_text_hint_time > cooldown then
-        local message = HintRandom(hint_id, Global.custom_hints.mid_text[hint_id])
-        Global.last_hint = {
-            time = Application:time(),
-            list_id = "mid_text",
-            hint_id = hint_id,
-            text = message
-        }
-        self:show_hint({ text = message })
-        last_mid_text_hint_time = current_time
+    if hint_id then
+        ShowHintCustom(hint_id, "mid_text", cooldowns[hint_id])
     end
 end)

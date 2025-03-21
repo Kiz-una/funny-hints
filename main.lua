@@ -213,26 +213,14 @@ local alert_generic = {
 InsertMessages(alert_generic, "main")
 
 Hooks:PreHook(HintManager, "_show_hint", "FunnyHints_main", function(self, id, time, only_sync, params)
-	SetHeistSpecificHints()
-
 	local hint_id = Global.hint_manager.hints[id].text_id
 	local message = nil
 	if multi_ids[hint_id] then
-		message = HintRandom(multi_ids[hint_id], Global.custom_hints.main_multi[multi_ids[hint_id]])
-		Global.last_hint = {
-			time = Application:time(),
-			list_id = "main_multi",
-			hint_id = multi_ids[hint_id],
-			text = message
-		}
+		message = SetHint(multi_ids[hint_id], "main_multi")
 	elseif Global.custom_hints.main[hint_id] then
-		message = HintRandom(hint_id, Global.custom_hints.main[hint_id])
-		Global.last_hint = {
-			time = Application:time(),
-			list_id = "main",
-			hint_id = hint_id,
-			text = message
-		}
+		message = SetHint(hint_id, "main")
+	else
+		return
 	end
 	LocalizationManager:add_localized_strings({
 		[hint_id] = message
