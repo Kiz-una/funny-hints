@@ -31,9 +31,6 @@ if not Global.hint_weights then
 else
     io.save_as_json(Global.hint_weights, SavePath .. "FunnyHints_Weights.json")
 end
-if Global.hint_easteregg then
-    managers.hud.show_hint = function(_)end
-end
 
 function IsPlayerAlive()
     local unit = managers.player and managers.player:player_unit()

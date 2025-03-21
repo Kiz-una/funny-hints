@@ -1,3 +1,7 @@
+if Global.hint_easteregg then
+    HUDManager.show_hint = function(_)end
+end
+
 local function set_weights(last_hint)
     local hint_id = last_hint.hint_id
     local messages = Global.custom_hints[last_hint.list_id][hint_id]
