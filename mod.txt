@@ -9,7 +9,7 @@
 		{ "hook_id" : "lib/network/handlers/unitnetworkhandler", "script_path" : "callmod.lua" }
 		{ "hook_id" : "core/lib/managers/coreenvironmentcontrollermanager", "script_path" : "effects.lua" }
 	],
-	"version" : "1.3.2",
+	"version" : "1.4.0",
 	"updates" : [{
 		"identifier" : "funny-hints",
 		"host": { "meta": "https://raw.githubusercontent.com/Kiz-una/funny-hints/refs/heads/main/meta.json" }
