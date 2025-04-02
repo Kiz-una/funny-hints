@@ -304,6 +304,7 @@ local function on_heist_start()
         else
             local function increase_modifier()
                 Global.hint_weights.welcome_hint_modifiers[hint_id] = modifier + 0.075
+                modifier = Global.hint_weights.welcome_hint_modifiers[hint_id]
                 LogPrivateChat("Inceased modifier to " .. Global.hint_weights.welcome_hint_modifiers[hint_id] * 100 .. "%.")
             end
             DelayedCalls:Add("welcome_hint_modifier1", 240, function()
