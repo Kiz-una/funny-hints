@@ -294,18 +294,18 @@ local function on_heist_start()
         if is_testing_map then
             chance = 0.05
         end
-        LogPrivateChat("Welcome hint chance is " .. chance * 100 .. "%. Modifier: +" .. modifier * 100 .. "%.")
+        --LogPrivateChat("Welcome hint chance is " .. chance * 100 .. "%. Modifier: +" .. modifier * 100 .. "%.")
         if math.random() < chance then
-            LogPrivateChat("Showing welcome hint...")
+            --LogPrivateChat("Showing welcome hint...")
             DelayedCalls:Add("welcome_hint", 5, function()
                 ShowHintCustom(hint_id, "welcome")
             end)
             Global.hint_weights.welcome_hint_modifiers[hint_id] = 0
-        else
+        elseif not is_testing_map then
             local function increase_modifier()
                 Global.hint_weights.welcome_hint_modifiers[hint_id] = modifier + 0.075
                 modifier = Global.hint_weights.welcome_hint_modifiers[hint_id]
-                LogPrivateChat("Inceased modifier to " .. Global.hint_weights.welcome_hint_modifiers[hint_id] * 100 .. "%.")
+                --LogPrivateChat("Inceased modifier to " .. modifier * 100 .. "%.")
             end
             DelayedCalls:Add("welcome_hint_modifier1", 240, function()
                 increase_modifier()
@@ -328,31 +328,34 @@ CustomHints.effects = {
 
     hint_last_life_replenished_2 = { "You really need to up your game.", "You should use cover, not a Doctor Bag!", "Are you just not paying attention?", "Please tell me you're using a joke loadout.", "You're really dragging the team down.", "How are you getting downed this much?", "Are you hugging the enemies?", "At this point it's more cost effective for you to go into custody instead." },
 
-    hint_last_life_replenished_end = { "I'm wasting my breath on you.", "You're godawful. I'm leaving.", "I've seen enough of you. Goodbye." },
+    hint_easteregg = { "I'm wasting my breath on you.", "You're godawful. I'm leaving.", "I've seen enough of you. Goodbye." },
 
     hint_flash = { "SEGA", "You have a little private time with me now. :)", "I can hear a horse carriage.", "That's embarrassing.", "That's going in my cringe compilation.", "Right in the optics!", "That wasn't a nice present.", "There there. I'm here for you.", "You poor thing.", "Damn gas makes me cry.", "Just wear a blindfold.", "Look away from those.", "Think faster chucklenut.", "Your opinion, my choice.", "Get 'banged! That doesn't sound right...", "Isn't flashing someone illegal?", "My eyes!", "We'll be right back.", "A minor setback.", "They're so tacticool.", "They got you good.", "Pocket sand!", "You took the full brunt of that.", "You like eating flashes?", "It's possible to avoid getting flashed this badly, you know.", "That was avoidable.", "Did you not see that coming?", "How're you gonna know what you're aiming at like this?", ":(", "Well this sucks.", "Bang the flash before it bangs you.", "Just close your eyes, dumbass." }
 }
-InsertMessages({{ids = {"hint_last_life_replenished_1"}, messages = CustomHints.effects.hint_last_life_replenished_0}}, "effects")
+InsertMessages({{ ids = { "hint_last_life_replenished_1" }, messages = CustomHints.effects.hint_last_life_replenished_0 }}, "effects")
 
 local previous_last_life_state = false
 local saved_by_doctorbag = 0
 if not Global.doctorbag_overuse then
     Global.doctorbag_overuse = 0
 end
+Global.misplays = 0
+LastLifeToCustody = false
 Hooks:PostHook(CoreEnvironmentControllerManager, "set_last_life", "FunnyHints_last_life", function(self, last_life_effect)
     if previous_last_life_state and not last_life_effect and IsPlayerAlive() then
         if Global.game_settings.one_down then
             ShowHintCustom("hint_last_life_replenished_0", "effects")
         else
             saved_by_doctorbag = saved_by_doctorbag + 1
-            if saved_by_doctorbag > 1 then
+            Global.misplays = Global.misplays + 1
+            if saved_by_doctorbag > 1 or Global.misplays > 1 then
                 local infamy = managers.experience:current_rank()
                 if infamy and infamy > 0 then
                     Global.doctorbag_overuse = Global.doctorbag_overuse + 1
                 end
             end
-            if saved_by_doctorbag > 3 or Global.doctorbag_overuse > 1 then -- 4 uses or 2 overuses across heists
-                ShowHintCustom("hint_last_life_replenished_end", "effects")
+            if saved_by_doctorbag > 3 or Global.doctorbag_overuse > 1 or Global.misplays > 2 then
+                ShowHintCustom("hint_easteregg", "effects")
                 Global.hint_easteregg = true
                 managers.hud.show_hint = function(_)end
 
@@ -365,6 +368,11 @@ Hooks:PostHook(CoreEnvironmentControllerManager, "set_last_life", "FunnyHints_la
             end
         end
     end
+
+    if previous_last_life_state and not IsPlayerAlive() then
+        LastLifeToCustody = true
+    end
+
     previous_last_life_state = last_life_effect
 
     --This is here because set_last_life always gets set to false on heist start. making this an on heist start function.

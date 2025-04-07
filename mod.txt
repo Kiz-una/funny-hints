@@ -1,15 +1,18 @@
 {
 	"name": "Funny Hints",
 	"description": "Adds a lot of randomized hints.",
-	"author": "Kiz",
+	"author": "Kizuna",
 	"image": "mod.png",
 	"hooks": [
 		{ "hook_id" : "lib/managers/hintmanager", "script_path" : "main.lua" }
 		{ "hook_id" : "lib/managers/hudmanager", "script_path" : "hud.lua" }
 		{ "hook_id" : "lib/network/handlers/unitnetworkhandler", "script_path" : "callmod.lua" }
 		{ "hook_id" : "core/lib/managers/coreenvironmentcontrollermanager", "script_path" : "effects.lua" }
+		{ "hook_id" : "lib/units/beings/player/playerdamage", "script_path" : "downed.lua" }
+		{ "hook_id" : "lib/units/beings/player/playermovement", "script_path" : "downed.lua" }
+		{ "hook_id" : "lib/managers/playermanager", "script_path" : "downed.lua" }
 	],
-	"version" : "1.6.1",
+	"version" : "2.0.0",
 	"updates" : [{
 		"identifier" : "funny-hints",
 		"host": { "meta": "https://raw.githubusercontent.com/Kiz-una/funny-hints/refs/heads/main/meta.json" }
