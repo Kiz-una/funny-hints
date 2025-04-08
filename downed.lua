@@ -1,19 +1,25 @@
 if not CustomHints.downed then
     CustomHints.downed = {
+        downed_generic = { "Make sure to scoop your blood back in.", "You're gonna get lead poisoning at this rate.", "You won't make your father proud at this rate.", "You're phoning it in.", "Is this too much for you to handle?", "Your loadout sucks.", "I think you need to adjust your strategy.", "You're doing great.", "Trials and tribulations are to be expected.", "Whomp whomp.", "You can do better.", "It looks like you're downed. Would you like help?", "Reminder: you die when you get killed.", "You should avoid getting downed.", "Death is not a good thing. You don't want it.", "Now someone will have to touch you.", "Maybe the difficulty is too high for you.", "Rage quit. Come on, do it." },
+
         name_tank_mini = { "I'm surprised you're still in one piece.", "You can't outsmart bullet.", "You've got quite a few holes in you...", "Nothing to be ashamed of. He just has the bigger gun.", "You're gonna need some serious plastic surgery.", "You think he's overcompensating for something?" },
         name_tank_hw = { "Spooky.", "He has no weakness!", "Scary.", "Horrifying.", "Frightening.", "Eerie.", "Can't shoot his head, can't shoot his back...", "You need absolute brute force.", "I can see his tounge...", "Disgusting creature." },
         name_hector_boss = { "Hector, how could you?", "You're supposed to kill the rat, not get killed by him!" },
         name_drug_lord_boss = { "Sosa made Sauce outta you." },
+        name_triad_boss = { "Burn baby burn!", "You look crispy.", "Is your middle pink and warm or are you well done?" },
         name_swat_turret = { "You chose to get downed.", "That thing can't chase you.", "You weren't ready to take that thing on.", "Humanity is overrated.", "It did exactly what it was build for.", "It was pointed at you.", "Target eliminated.", "Hasta la vista, baby.", "Use more gun." },
         name_phalanx_vip = { "You got downed by that pussy?", "Shot by Captain Neville Winters himself? What an honor!", "That one was personal." },
         name_phalanx_minion = { "Can't he fuck off like his boss?", "He's not following the Captain's lead.", "His boss doesn't deserve him.", "He's not supposed to be an independent thinker!", "His boss bails on him and he just keeps fighting?", "Is he getting paid overtime for this?" },
+
         phalanx_formation = { "Dealing with those guys is so fun, isn't it?", "I hate those guys.", "Did they find these guys at a battle reenactment?", "I thought legionaries used spears not submachine guns.", "Ring around the rosie, a pocket full of posies.", "If I was you, I'd always bring a piercing gun to deal with these guys." },
+
         tag_dozer = { "You hit a wall.", "Fatman wins!", "Ouch.", "That guy hits hard!", "He's got the better armor.", "His confidence: justified.", "He's gonna brag about this.", "He's clearly the bigger man.", "You need a better plan than that next time.", "Come on, you're better than that man-child.", "BULLDOZER! :D", "You look like you got hit by a Truck.", "Tenderized.", "WAKEY WAKEY LITTLE BABY!" },
         tag_cloaker = { "He didn't even kick you!", "Cloakers shouldn't even have guns.", "Guess a bullet works just as well as a boot." },
         tag_taser = { "So much for non-lethal.", "Guess he had enough of your shit.", "He compromised his principles just for you." },
         tag_medic = { "You got downed by a nurse.", "He defintiely doesn't have healing bullets.", "What happened to \"do no harm\"?", "That guy didn't even come here to fight!", "Guess he's not a pacifist.", "You need a medic. How ironic.", "He's gonna have to heal you once they bring you in." },
         tag_sniper = { "Meet the Sniper.", "It's over. He has the high ground.", "He has a laser to let you find him easier.", "Tell him to face you like a man.", "Bullseye.", "Now that's a lot of damage!", "He's professional. You're amateurish.", "Does that count as working remotely?" },
         tag_marshalstun = { "My fucking eyes.", "At least he can stop now." },
+
         cuffed = { "What the fuck are you doing?", "...", "I lost some respect for you." },
         tased = { "Fried heister.", "Where are your teammates when you need them?", "Some friends you have." },
         tased_assist = { "Unfair.", "So much for non-lethal.", "I thought teamwork was our thing!", "You chose a bad place to get tased.", "That Tazer had support.", "That's one way to guarantee an easy target.", "Now that was underhanded." },
@@ -22,8 +28,8 @@ if not CustomHints.downed then
         SPOOCed_cuffed = { "Oh look, he brought a gift.", "I guess at least this hurts less.", "This is out of character.", "Look at him. He's already looking for the next one.", "Let's hope your friends are quicker." },
         fall_damage = { "Clumsy.", "You can't fly.", "Your poor legs.", "This is your own fault.", "Do I need to child-proof your jump button?", "I have a fear of heights. You could use it too." },
 
-        hint_custody_visit = { "Right to jail.", "Do not pass go, do not collect $200.", "Now your teammates will have to pick up the slack." },
-        hint_custody_visit_last_life = { "You ran out of chances.", "You're not a cat. You have many lives but not nine." },
+        hint_custody_visit = { "Right to jail.", "Do not pass go, do not collect $200.", "Now your teammates will have to pick up the slack.", "You have some time now to go grab a snack.", "Oh boohoo! It's not like you'll be locked up for long.", "You should take this time to reflect on what you did." },
+        hint_custody_visit_last_life = { "You ran out of chances.", "You're not a cat. You have many lives but not nine.", "Look at the bright side, prisoners get free healthcare!", "You keep playing like that and I'll lose respect for you." },
     }
     InsertMessages({
         { ids = { "SPOOCed_cuffed" }, messages = CustomHints.downed.SPOOCed },
@@ -33,7 +39,7 @@ if not CustomHints.downed then
 end
 
 if PlayerDamage then
-    local boss_units = { "mobster_boss", "hector_boss", "biker_boss", "chavez_boss", "drug_lord_boss", "triad_boss", "deep_boss" }
+    local boss_units = { "mobster_boss", "hector_boss", "biker_boss", "chavez_boss", "drug_lord_boss", "triad_boss", "deep_boss", "snowman_boss", "piggydozer" }
     local tag_rules = {
         tag_dozer = { has = { "law", "tank" } },
         tag_cloaker = { has = { "spooc" } },
@@ -91,6 +97,9 @@ if PlayerDamage then
                         return
                     end
                 end
+            end
+            if math.random() < 0.2 then
+                ShowHintCustom("downed_generic", "downed")
             end
         end
     end)

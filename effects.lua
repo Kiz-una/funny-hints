@@ -193,7 +193,7 @@ local function on_heist_start()
         welcome_hox_3 --[[The Revenge]] = { "Let's see what kind of trouble we can get ourselves into." },
         welcome_mex_cooking --[[Coyopa Compound]] = { "This is just cook off but harder.", "Why did you come back here?" },
         welcome_shoutout_raid --[[Meltdown]] = {  },
-        welcome_chew --[[Interception]] = { "Choo Choo!" },
+        welcome_chew --[[Interception]] = { "Choo Choo!", "All aboard!" },
         welcome_kenaz --[[Golden Grin Casino]] = { "Let's go gambling!", "If gambling is a disease, is this a hospital?" },
         welcome_cage --[[Car Shop]] = {  },
         welcome_trai --[[Lost in Transit]] = {  },
@@ -326,7 +326,7 @@ CustomHints.effects = {
 
     hint_last_life_replenished_1 = { "If you get out of custody, they also give you ammo.", "Are you done fucking around now?", "If you need it again, that'll be truly embarrassing.", "Come on, you really need this crutch?", "Real heisters don't use Doctor Bags." },
 
-    hint_last_life_replenished_2 = { "You really need to up your game.", "You should use cover, not a Doctor Bag!", "Are you just not paying attention?", "Please tell me you're using a joke loadout.", "You're really dragging the team down.", "How are you getting downed this much?", "Are you hugging the enemies?", "At this point it's more cost effective for you to go into custody instead." },
+    hint_last_life_replenished_2 = { "You really need to up your game.", "You should use cover, not a Doctor Bag!", "Are you just not paying attention?", "Please tell me you're using a joke loadout.", "You're really dragging the team down.", "How are you getting downed this much?", "Are you hugging the enemies?", "At this point it's more cost effective for you to go into custody instead.", "My grandmother could beat this heist if she healed as much as you do." },
 
     hint_easteregg = { "I'm wasting my breath on you.", "You're godawful. I'm leaving.", "I've seen enough of you. Goodbye." },
 
