@@ -1,10 +1,13 @@
 if not CustomHints.downed then
     CustomHints.downed = {
-        name_tank_mini = { "I'm surprised you're still in one piece.", "You can't outsmart bullet.", "You've got quite a few holes in you...", "Nothing to be ashamed of. He just has the bigger gun.", "You're gonna need some serious plastic surgery." },
-        name_tank_hw = { "Spooky.", "He has no weakness!", "Scary.", "Horrifying.", "Frightening.", "Eerie.", "Can't shoot his head, can't shoot his back...", "You need absolute brute force.", "Your whole team needs to focus fire.", "I can see his tounge...", "Disgusting creature." },
-        name_phalanx_vip = { "I respect that he doesn't just let his minions do all the work.", "Shot by Captain Neville Winters himself? What an honor!", "That one was personal." },
+        name_tank_mini = { "I'm surprised you're still in one piece.", "You can't outsmart bullet.", "You've got quite a few holes in you...", "Nothing to be ashamed of. He just has the bigger gun.", "You're gonna need some serious plastic surgery.", "You think he's overcompensating for something?" },
+        name_tank_hw = { "Spooky.", "He has no weakness!", "Scary.", "Horrifying.", "Frightening.", "Eerie.", "Can't shoot his head, can't shoot his back...", "You need absolute brute force.", "I can see his tounge...", "Disgusting creature." },
         name_hector_boss = { "Hector, how could you?", "You're supposed to kill the rat, not get killed by him!" },
         name_drug_lord_boss = { "Sosa made Sauce outta you." },
+        name_swat_turret = { "You chose to get downed.", "That thing can't chase you.", "You weren't ready to take that thing on.", "Humanity is overrated.", "It did exactly what it was build for.", "It was pointed at you.", "Target eliminated.", "Hasta la vista, baby.", "Use more gun." },
+        name_phalanx_vip = { "You got downed by that pussy?", "Shot by Captain Neville Winters himself? What an honor!", "That one was personal." },
+        name_phalanx_minion = { "Can't he fuck off like his boss?", "He's not following the Captain's lead.", "His boss doesn't deserve him.", "He's not supposed to be an independent thinker!", "His boss bails on him and he just keeps fighting?", "Is he getting paid overtime for this?" },
+        phalanx_formation = { "Dealing with those guys is so fun, isn't it?", "I hate those guys.", "Did they find these guys at a battle reenactment?", "I thought legionaries used spears not submachine guns.", "Ring around the rosie, a pocket full of posies.", "If I was you, I'd always bring a piercing gun to deal with these guys." },
         tag_dozer = { "You hit a wall.", "Fatman wins!", "Ouch.", "That guy hits hard!", "He's got the better armor.", "His confidence: justified.", "He's gonna brag about this.", "He's clearly the bigger man.", "You need a better plan than that next time.", "Come on, you're better than that man-child.", "BULLDOZER! :D", "You look like you got hit by a Truck.", "Tenderized.", "WAKEY WAKEY LITTLE BABY!" },
         tag_cloaker = { "He didn't even kick you!", "Cloakers shouldn't even have guns.", "Guess a bullet works just as well as a boot." },
         tag_taser = { "So much for non-lethal.", "Guess he had enough of your shit.", "He compromised his principles just for you." },
@@ -54,21 +57,34 @@ if PlayerDamage then
 
             local unit = attack_data.attacker_unit
             if not unit or not unit:alive() then
-                LogPrivateChat("attacker_unit: " .. tostring(unit))
+                LogPrivateChat("ERROR: Downed by an invalid unit: " .. tostring(unit))
                 return
             end
-            local unit_base = unit:base()
-            local unit_name = unit_base:char_tweak_name()
-            LogPrivateChat("Downed by " .. tostring(unit_name))
+            local unit_base = unit.base and unit:base()
+            local unit_name = unit_base.char_tweak_name and unit_base:char_tweak_name()
+            local unit_type = unit_base.get_type and unit_base:get_type()
+            local attacker_name = unit_name or unit_type
 
-            if unit_name and CustomHints.downed["name_" .. unit_name] then
-                if boss_units[unit_name] and math.random() < 0.5 then
+            if attacker_name == "phalanx_minion" and Global.game_settings.gamemode == "crime_spree" then
+                attacker_name = "phalanx_crime_spree"
+            end
+
+            if unit_name and unit_type then
+                LogPrivateChat("Downed by a " .. unit_type .. " named " .. unit_name)
+            else
+                LogPrivateChat("Downed by " .. tostring(attacker_name))
+            end
+
+            if managers.hud._hud_assault_corner._assault_mode == "phalanx" and (attacker_name == "phalanx_minion" or attacker_name == "phalanx_vip") then
+                ShowHintCustom("phalanx_formation", "downed")
+            elseif attacker_name and CustomHints.downed["name_" .. attacker_name] then
+                if boss_units[attacker_name] and math.random() < 0.5 then
                     --do nothing but don't return
                 else
-                    ShowHintCustom("name_" .. unit_name, "downed")
+                    ShowHintCustom("name_" .. attacker_name, "downed")
                     return
                 end
-            else
+            elseif unit_base._tags then
                 for hint_id, rules in pairs(tag_rules) do
                     if unit_base:has_all_tags(rules.has) and (not rules.lacks or not unit_base:has_any_tag(rules.lacks)) then
                         ShowHintCustom(hint_id, "downed")
